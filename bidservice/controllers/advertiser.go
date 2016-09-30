@@ -30,15 +30,15 @@ func GetAdvertisers(w http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Println("Advertiser_id: ", ad.Advertiser_id)
-		log.Println("Advertiser_name: ", ad.Advertise_name)
+		//log.Println("Advertiser_id: ", ad.Advertiser_id)
+		//log.Println("Advertiser_name: ", ad.Advertise_name)
 
 		cda = GetCreatives(ad.Advertiser_id)
 
 		ad.CreativeData = &cda
 		Advertise = append(Advertise, ad)
 	}
-	log.Printf("%+v", Advertise[0].CreativeData)
+	//log.Printf("%+v", Advertise[0].CreativeData)
 	json.NewEncoder(w).Encode(Advertise)
 }
 
@@ -57,10 +57,10 @@ func GetCreatives(Advertiser_id int) []models.CreativeData {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Println("Creatives_id: ", cd.Creative_id)
-		log.Println("Content: ", cd.Content)
+		//log.Println("Creatives_id: ", cd.Creative_id)
+		//log.Println("Content: ", cd.Content)
 		cda = append(cda, cd)
-		log.Println(cda)
+		//log.Println(cda)
 	}
 	return cda
 }
