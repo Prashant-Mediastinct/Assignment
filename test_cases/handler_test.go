@@ -17,7 +17,11 @@ func TestHandler(t *testing.T) {
 	//ad.CreativeData = initCreativeData()
 	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
 	// pass 'nil' as the third parameter.
-	req, err := http.NewRequest("GET", "/publisher_id/4", nil)
+
+	publisherID := "4"
+	testURL := "/publisher_id/" + publisherID
+
+	req, err := http.NewRequest("GET", testURL, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -38,11 +42,13 @@ func TestHandler(t *testing.T) {
 
 	//log.Println(reflect.TypeOf(ad.CreativeData))
 	err = json.NewDecoder(rr.Body).Decode(&ads)
-	log.Printf("Ads: %+v", ads[0].CreativeData)
+	log.Printf("Ads: %+v", ads[1].CreativeData)
+
 	if err != nil {
 		t.Error(err.Error())
 	}
-	//t.Error(ad.Advertise_name)
+
+	//t.Error(ads[0].Advertise_name)
 	//t.Errorf()
 
 	//t.Errorf(rr.Body.String())
