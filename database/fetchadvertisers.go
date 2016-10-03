@@ -19,15 +19,15 @@ func FetchAdvertisers(params string) []models.AdvertiserData {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Println("Advertiser_id: ", ad.Advertiser_id)
-		log.Println("Advertiser_name: ", ad.Advertiser_name)
+		//log.Println("Advertiser_id: ", ad.Advertiser_id)
+		//log.Println("Advertiser_name: ", ad.Advertiser_name)
 
 		cda = fetchCreatives(ad.Advertiser_id)
 
-		ad.CreativeData = &cda
+		ad.CreativeData = cda
 		Advertiser = append(Advertiser, ad)
 	}
-	log.Printf("%+v", Advertiser[0].CreativeData)
+	//log.Printf("%+v", Advertiser[0].CreativeData)
 
 	return Advertiser
 }
