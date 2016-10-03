@@ -1,39 +1,25 @@
 package controllers
 
 import (
-	"github.com/Prashant-Mediastinct/Assignment/databaseconn"
-	_ "github.com/go-sql-driver/mysql"
+	//  "github.com/Prashant-Mediastinct/Assignment/bidservice/controllers"
+	"github.com/Prashant-Mediastinct/Assignment/database"
 	"log"
 	"net/http"
 )
 
-var Publisher_id string
+var Publisher_Id string
 
 func GetPublisherId(w http.ResponseWriter, req *http.Request) {
 
-	db := databaseconn.InitDB("root:root@/test")
-
-	defer db.Close()
+	database.DBDef()
 
 	params := req.URL.Path[8:9]
 	log.Println(params)
-	row := db.QueryRow("select Publisher_id from Adunits where Adunit_id=?", params)
 
-	err := row.Scan(&Publisher_id)
-	log.Println(Publisher_id)
+	Publisher_Id = database.FetchPublisher(params)
+	log.Println(Publisher_Id)
 
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Println("Publisher ID: ", Publisher_id)
+	log.Println("Publisher ID: ", Publisher_Id)
 
-	url := "http://localhost:8081/publisher_id/" + Publisher_id
-
-	res, err := http.Get(url)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	log.Println(res)
+	callBidService(Publisher_Id)
 }
