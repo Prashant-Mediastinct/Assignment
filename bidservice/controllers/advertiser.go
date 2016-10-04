@@ -16,10 +16,7 @@ func GetAdvertisers(w http.ResponseWriter, req *http.Request) {
 	params := req.URL.Path[14:]
 	log.Println("Publisher_id passed : ", params)
 
-	if params < "7" {
-		Advertiser = database.FetchAdvertisers(params)
-	} else {
-		log.Printf("Record with Publisher_Id : %s doesn't exist", params)
-	}
+	Advertiser = database.FetchAdvertisers(params)
+
 	json.NewEncoder(w).Encode(Advertiser)
 }
