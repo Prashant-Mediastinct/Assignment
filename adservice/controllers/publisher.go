@@ -1,9 +1,11 @@
 package controllers
 
 import (
+	"encoding/json"
 	//  "github.com/Prashant-Mediastinct/Assignment/bidservice/controllers"
 	"github.com/Prashant-Mediastinct/Assignment/database"
-	//"log"
+	//"github.com/Prashant-Mediastinct/Assignment/models"
+	"log"
 	"net/http"
 )
 
@@ -17,9 +19,11 @@ func GetPublisherId(w http.ResponseWriter, req *http.Request) {
 	//log.Println(params)
 
 	Publisher_Id = database.FetchPublisher(params)
-	//log.Println(Publisher_Id)
+	log.Println(Publisher_Id)
 
 	//log.Println("Publisher ID: ", Publisher_Id)
 
-	callBidService(Publisher_Id, params)
+	Adunit := callBidService(Publisher_Id, params)
+
+	json.NewEncoder(w).Encode(Adunit)
 }

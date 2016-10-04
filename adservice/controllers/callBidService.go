@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func callBidService(Publisher_id, params string) {
+func callBidService(Publisher_id, params string) models.AdunitData {
 
 	var Advertiser []models.AdvertiserData
 
@@ -25,7 +25,10 @@ func callBidService(Publisher_id, params string) {
 
 	log.Println("Data: ", Advertiser)
 
-	AdunitData.Adunit_id = params
+	Adunit.Adunit_id = params
+	Adunit.Adunit_info.Advertiser = Advertiser
+
+	return Adunit
 	/*log.Printf("Hello there : %+v", res)
 
 	if res == nil {
