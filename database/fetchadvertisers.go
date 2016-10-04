@@ -12,7 +12,10 @@ func FetchAdvertisers(params string) []models.AdvertiserData {
 
 	var ad models.AdvertiserData
 	var cda []models.CreativeData
+
+	//log.Println("Db : %s", DB)
 	rows_advertiser, err := DB.Query("select Advertiser_id, Advertise_name from Advertisers where Publisher_id=? and status = 'Active'", params)
+	log.Println("Here")
 
 	for rows_advertiser.Next() {
 		err = rows_advertiser.Scan(&ad.Advertiser_id, &ad.Advertiser_name)
