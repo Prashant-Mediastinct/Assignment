@@ -2,22 +2,15 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
+	"github.com/Prashant-Mediastinct/Assignment/cache"
 	"github.com/Prashant-Mediastinct/Assignment/database"
-	as "github.com/aerospike/aerospike-client-go"
 	"log"
 	"net/http"
 )
 
 var Publisher_Id string
-var Client *as.Client
-var Key, Key1 *as.Key
-var WritePolicy *as.WritePolicy
-var ReadPolicy *as.BasePolicy
 
-//var Adunit models.AdunitData
-
-func init() {
+/*func init() {
 
 	var err error
 	Client, err = as.NewClient("127.0.0.1", 3000)
@@ -35,17 +28,17 @@ func init() {
 	WritePolicy = as.NewWritePolicy(0, 10)
 	ReadPolicy = as.NewPolicy()
 
-}
+}*/
 
 func GetPublisherId(w http.ResponseWriter, req *http.Request) {
 
 	params := req.URL.Path[8:9]
 	log.Println("Params passed : ", params)
 
-	keyName := fmt.Sprintf("adUnit:%s", params)
+	/*keyName := fmt.Sprintf("adUnit:%s", params)
 	Key, _ = as.NewKey("test", "myset", keyName)
-
-	status := checkAerospikeForPublisherId(params, w)
+	*/
+	status := cache.GetDataFromCache(params, w)
 
 	if status != true {
 		database.DBDef()
@@ -55,12 +48,8 @@ func GetPublisherId(w http.ResponseWriter, req *http.Request) {
 
 		Adunit := callBidService(Publisher_Id, params)
 
-		adunit := &Adunit
-		err := Client.PutObject(WritePolicy, Key, adunit)
+		cache.PostDataIntoCache(Adunit)
 
-		if err != nil {
-			log.Fatalf("Error  :", err.Error())
-		}
 		json.NewEncoder(w).Encode(Adunit)
 	}
 }
