@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"github.com/Prashant-Mediastinct/Assignment/database"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -10,7 +9,6 @@ import (
 
 func TestAdvertiser(t *testing.T) {
 
-	log.Println("Testing for Advertiser")
 	Publisher_id := "4"
 	testURL := "/publisher_id/" + Publisher_id
 
@@ -34,6 +32,4 @@ func TestAdvertiser(t *testing.T) {
 	if err != nil {
 		t.Error(err.Error())
 	}
-
-	log.Println("Advertiser testing : SUCCESSFUL!")
 }
