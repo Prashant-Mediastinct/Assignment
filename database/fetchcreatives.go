@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func fetchCreatives(Advertiser_id int) []models.CreativeData {
+func fetchCreatives(Advertiser_id string) []models.CreativeData {
 
 	var cda []models.CreativeData
 	var cd models.CreativeData

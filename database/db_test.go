@@ -1,27 +1,17 @@
 package database
 
-import (
-	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
-	"log"
-	"testing"
-)
+import "testing"
+import "database/sql"
 
 func TestDBConn(t *testing.T) {
 
-	dataSourceName := "root:root@/test"
-	db, err := sql.Open("mysql", dataSourceName)
-	if err != nil {
-		log.Fatal(err)
-		log.Println(err.Error())
-	}
-	log.Println("DB connection opened...")
+	var DB *sql.DB
+	DB = initDB("root:root@/test")
 
-	//check for availability..
-	err1 := db.Ping()
+	//log.Printf("DB err : %+v", err)
+
+	err1 := DB.Ping()
 	if err1 != nil {
-		log.Fatal(err1)
-		log.Println(err1.Error())
+		t.Error("Database Unavailable")
 	}
-	log.Println("DB available...")
 }

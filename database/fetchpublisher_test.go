@@ -1,22 +1,18 @@
 package database
 
-import (
-	//"github.com/Prashant-Mediastinct/Assignment/database"
-	"log"
-	"testing"
-)
+import "testing"
 
 func TestFetchPublishers(t *testing.T) {
 
-	params := "5"
+	params := "7"
+
+	expected := "10"
 
 	DBDef()
 
 	Publisher_Id := FetchPublisher(params)
 
-	if Publisher_Id == "" {
-		t.Errorf("%s Doesnt exist!", Publisher_Id)
-	} else {
-		log.Println("Advertiser Data : ", Publisher_Id)
+	if Publisher_Id != expected {
+		t.Errorf("Publisher_id : got %s want %s", Publisher_Id, expected)
 	}
 }

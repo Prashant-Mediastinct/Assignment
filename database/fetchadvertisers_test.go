@@ -1,18 +1,21 @@
 package database
 
-import (
-	//"github.com/Prashant-Mediastinct/Assignment/database"
-	"log"
-	"testing"
-)
+import "testing"
+import "github.com/Prashant-Mediastinct/Assignment/models"
 
 func TestFetchAdvertiser(t *testing.T) {
 
-	params := "4"
+	var Advertiser []models.AdvertiserData
+	params := "10"
+
+	expected := "11"
 
 	DBDef()
 
-	Advertiser := FetchAdvertisers(params)
+	Advertiser = FetchAdvertisers(params)
 
-	log.Println("Advertiser Data : ", Advertiser)
+	if Advertiser[0].Advertiser_id != expected {
+		t.Errorf("Publisher_id : got %s want %s", Advertiser[0].Advertiser_id, expected)
+	}
+
 }

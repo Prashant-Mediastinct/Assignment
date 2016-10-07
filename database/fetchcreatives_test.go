@@ -1,18 +1,19 @@
 package database
 
-import (
-	//"github.com/Prashant-Mediastinct/Assignment/database"
-	"log"
-	"testing"
-)
+import "testing"
+import "github.com/Prashant-Mediastinct/Assignment/models"
 
 func TestFetchCreatives(t *testing.T) {
 
-	params := 4
-
+	var CDA []models.CreativeData
+	params := "11"
+	expected := "11"
 	DBDef()
 
-	CDA := fetchCreatives(params)
+	CDA = fetchCreatives(params)
 
-	log.Println("Advertiser Data : ", CDA)
+	if CDA[0].Creative_id != expected {
+		t.Errorf("Publisher_id : got %s want %s", CDA[0].Creative_id, expected)
+	}
+	//log.Println("Advertiser Data : ", CDA)
 }
