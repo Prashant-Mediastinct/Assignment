@@ -2,28 +2,70 @@ package controllers
 
 import (
 	"encoding/json"
-	//  "github.com/Prashant-Mediastinct/Assignment/bidservice/controllers"
+	"fmt"
 	"github.com/Prashant-Mediastinct/Assignment/database"
-	//"github.com/Prashant-Mediastinct/Assignment/models"
+	as "github.com/aerospike/aerospike-client-go"
 	"log"
 	"net/http"
 )
 
 var Publisher_Id string
+var Client *as.Client
+var Key, Key1 *as.Key
+var WritePolicy *as.WritePolicy
+var ReadPolicy *as.BasePolicy
+
+//var Adunit models.AdunitData
+
+func init() {
+
+	var err error
+
+	Client, err = as.NewClient("127.0.0.1", 3000)
+
+	if !Client.IsConnected() {
+		log.Fatal("Not Connected!")
+	} else {
+		log.Println("Connected!!")
+	}
+
+	if err != nil {
+		log.Fatalf("Error  :", err.Error())
+	}
+
+	WritePolicy = as.NewWritePolicy(0, 10)
+	ReadPolicy = as.NewPolicy()
+
+}
 
 func GetPublisherId(w http.ResponseWriter, req *http.Request) {
 
-	database.DBDef()
-
 	params := req.URL.Path[8:9]
-	//log.Println(params)
+	log.Println("Params passed : ", params)
 
-	Publisher_Id = database.FetchPublisher(params)
-	log.Println(Publisher_Id)
+	keyName := fmt.Sprintf("adUnit:%s", params)
+	Key, _ = as.NewKey("test", "myset", keyName)
 
-	//log.Println("Publisher ID: ", Publisher_Id)
+	status := checkAerospikeForPublisherId(params, w)
 
-	Adunit := callBidService(Publisher_Id, params)
+	//log.Println("Found? ", status)
+	if status != true {
+		database.DBDef()
 
-	json.NewEncoder(w).Encode(Adunit)
+		log.Println("Fetching From database!!")
+		Publisher_Id = database.FetchPublisher(params)
+
+		Adunit := callBidService(Publisher_Id, params)
+		//log.Printf("Adunit : %+v", Adunit)
+
+		adunit := &Adunit
+		err := Client.PutObject(WritePolicy, Key, adunit)
+
+		if err != nil {
+			log.Fatalf("Error  :", err.Error())
+		}
+		//log.Printf("Adunit: %+v ", Adunit)
+		json.NewEncoder(w).Encode(Adunit)
+	}
+
 }
