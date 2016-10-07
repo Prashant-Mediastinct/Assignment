@@ -1,6 +1,6 @@
 package models
 
 type CreativeData struct {
-	Creative_id int    `json:"creativeId,omitempty"`
+	Creative_id string `json:"creativeId,omitempty"`
 	Content     string `json:"content,omitempty"`
 }
