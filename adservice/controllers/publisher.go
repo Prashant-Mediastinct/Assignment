@@ -20,7 +20,6 @@ var ReadPolicy *as.BasePolicy
 func init() {
 
 	var err error
-
 	Client, err = as.NewClient("127.0.0.1", 3000)
 
 	if !Client.IsConnected() {
@@ -48,7 +47,6 @@ func GetPublisherId(w http.ResponseWriter, req *http.Request) {
 
 	status := checkAerospikeForPublisherId(params, w)
 
-	//log.Println("Found? ", status)
 	if status != true {
 		database.DBDef()
 
@@ -56,7 +54,6 @@ func GetPublisherId(w http.ResponseWriter, req *http.Request) {
 		Publisher_Id = database.FetchPublisher(params)
 
 		Adunit := callBidService(Publisher_Id, params)
-		//log.Printf("Adunit : %+v", Adunit)
 
 		adunit := &Adunit
 		err := Client.PutObject(WritePolicy, Key, adunit)
@@ -64,8 +61,6 @@ func GetPublisherId(w http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			log.Fatalf("Error  :", err.Error())
 		}
-		//log.Printf("Adunit: %+v ", Adunit)
 		json.NewEncoder(w).Encode(Adunit)
 	}
-
 }

@@ -15,5 +15,4 @@ func TestFetchCreatives(t *testing.T) {
 	if CDA[0].Creative_id != expected {
 		t.Errorf("Publisher_id : got %s want %s", CDA[0].Creative_id, expected)
 	}
-	//log.Println("Advertiser Data : ", CDA)
 }

@@ -20,11 +20,7 @@ func checkAerospikeForPublisherId(params string, w http.ResponseWriter) bool {
 
 	err := Client.GetObject(ReadPolicy, Key1, Adunit)
 
-	//Adunit := record
-	//log.Println(reflect.TypeOf(adunit))
-
 	if err == nil {
-
 		log.Println("Fetched from Aerospike!!")
 		log.Printf("Record found : %+v", Adunit)
 

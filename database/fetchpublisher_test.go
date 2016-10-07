@@ -5,11 +5,9 @@ import "testing"
 func TestFetchPublishers(t *testing.T) {
 
 	params := "7"
-
 	expected := "10"
 
 	DBDef()
-
 	Publisher_Id := FetchPublisher(params)
 
 	if Publisher_Id != expected {

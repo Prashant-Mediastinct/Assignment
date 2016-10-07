@@ -7,10 +7,6 @@ import (
 )
 
 func TestHandler(t *testing.T) {
-	//var ads []models.AdvertiserData
-	//var ad models.AdvertiserData
-	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
-	// pass 'nil' as the third parameter.
 
 	adunit := "7"
 	testURL := "/adunit/" + adunit
