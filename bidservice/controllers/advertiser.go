@@ -13,10 +13,10 @@ func GetAdvertisers(w http.ResponseWriter, req *http.Request) {
 
 	var Advertiser []models.AdvertiserData
 
-	params := req.URL.Path[14:]
-	log.Println("Publisher_id passed : ", params)
+	publisher_Id := req.URL.Path[14:]
+	log.Println("Publisher_id passed : ", publisher_Id)
 
-	Advertiser = database.FetchAdvertisers(params)
+	Advertiser = database.FetchAdvertisers(publisher_Id)
 
 	json.NewEncoder(w).Encode(Advertiser)
 }
