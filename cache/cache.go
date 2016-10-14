@@ -1,12 +1,10 @@
 package cache
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/Prashant-Mediastinct/Assignment/models"
 	as "github.com/aerospike/aerospike-client-go"
 	"log"
-	"net/http"
 )
 
 var (
@@ -19,16 +17,19 @@ type CacheClient struct {
 	client *as.Client
 }
 
-/*type ClientConfig {
-	Host string
-	Port int
-}*/
+func (cc *CacheClient) InitialiseCacheClient() *CacheClient {
 
-func init() {
-
-	var cc *CacheClient
 	var err error
+
+	//log.Printf("CC : %#v", CC)
+	cc = &CacheClient{}
 	cc.client, err = as.NewClient("127.0.0.1", 3000)
+
+	//log.Printf("ClientCache : %+v", CC)
+
+	if err != nil {
+		log.Fatalf("Error  :", err.Error())
+	}
 
 	if !cc.client.IsConnected() {
 		log.Fatal("Not Connected!")
@@ -42,36 +43,29 @@ func init() {
 
 	WritePolicy = as.NewWritePolicy(0, 10)
 	ReadPolicy = as.NewPolicy()
-
+	return cc
 }
 
-func (cc *CacheClient) GetDataFromCache(params string, w http.ResponseWriter) bool {
+func (cc *CacheClient) GetDataFromCache(adUnit string) (models.AdunitData, bool) {
 
 	var adunit models.AdunitData
-	keyName := fmt.Sprintf("adUnit:%s", params)
+	keyName := fmt.Sprintf("adUnit:%s", adUnit)
 	Key, _ = as.NewKey("test", "myset", keyName)
-
-	Adunit := &adunit
-
-	err := cc.client.GetObject(ReadPolicy, Key, Adunit)
+	//log.Println("In getdatafromcache")
+	err := cc.client.GetObject(ReadPolicy, Key, &adunit)
 
 	if err == nil {
-		log.Println("Fetched from Aerospike!!")
-		log.Printf("Record found : %+v", Adunit)
-
-		log.Printf("Adunit: %+v ", Adunit)
-		json.NewEncoder(w).Encode(Adunit)
-		return true
+		log.Println("Fetched from Aerospike for AdUnit_Id : ", adUnit)
+		return adunit, true
 	} else {
-		log.Println("No Such Data Exists!")
-		return false
+		return adunit, false
 	}
 }
 
 func (cc *CacheClient) PostDataIntoCache(Adunit models.AdunitData) {
 
-	adunit := &Adunit
-	err := cc.client.PutObject(WritePolicy, Key, adunit)
+	//adunit := &Adunit
+	err := cc.client.PutObject(WritePolicy, Key, &Adunit)
 
 	if err != nil {
 		log.Fatalf("Error  :", err.Error())
