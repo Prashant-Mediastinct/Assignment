@@ -5,15 +5,15 @@ import (
 	"log"
 )
 
-func FetchPublisher(params string) string {
+func FetchPublisher(adUnit_Id string) string {
 
-	var Publisher_Id string
-	row := DB.QueryRow("select Publisher_id from Adunits where Adunit_id=?", params)
+	var publisher_Id string
+	row := DB.QueryRow("select Publisher_id from Adunits where Adunit_id=?", adUnit_Id)
 
-	err := row.Scan(&Publisher_Id)
+	err := row.Scan(&publisher_Id)
 	if err != nil {
-		log.Fatal(err)
+		log.Println("No Data for Adunit_Id: ", adUnit_Id)
 	}
 
-	return Publisher_Id
+	return publisher_Id
 }
