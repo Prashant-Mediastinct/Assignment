@@ -23,17 +23,10 @@ func callBidService(Publisher_id, params string) models.AdunitData {
 	json.NewDecoder(res.Body).Decode(&Advertiser)
 	//log.Println("Response body : ", res.Body)
 
-	log.Println("Data: ", Advertiser)
+	//log.Println("Data: ", Advertiser)
 
 	Adunit.Adunit_id = params
 	Adunit.Adunit_info.Advertiser = Advertiser
 
 	return Adunit
-	/*log.Printf("Hello there : %+v", res)
-
-	if res == nil {
-		log.Println("No advertiser available for the given publisher id")
-	} else {
-		log.Printf("Response body : ", res)
-	}*/
 }
