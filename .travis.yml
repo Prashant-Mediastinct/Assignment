@@ -6,5 +6,6 @@ go:
 
 before_install: go get ./...
 
-script : go build
-
+script : 
+  - go build adservice/main.go
+  - go build bidservice/main.go
