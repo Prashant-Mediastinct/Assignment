@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	database.BDef()
+	database.DBDef()
 	defer database.DB.Close()
 
 	http.HandleFunc("/publisher_id/", controllers.GetAdvertisers)
