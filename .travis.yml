@@ -1,10 +1,13 @@
+
 language: go
 
 go: master
   
 install: go get ./...
 
+git:
+  depth: 10
+
 script: 
   - go build adservice/main.go
   - go build bidservice/main.go
-
