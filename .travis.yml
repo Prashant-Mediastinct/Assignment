@@ -10,3 +10,6 @@ git:
 script: 
   - go build adservice/main.go
   - go build bidservice/main.go
+
+after_success :
+  - git merge feature
