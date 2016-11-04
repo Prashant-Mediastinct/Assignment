@@ -7,3 +7,4 @@ install: go get ./...
 script: 
   - go build adservice/main.go
   - go build bidservice/main.go
+
