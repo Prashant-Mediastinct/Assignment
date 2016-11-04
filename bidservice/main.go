@@ -1,15 +1,16 @@
 package main
 
 import (
-	"github.com/Prashant-Mediastinct/Assignment/bidservice/controllers"
-	"github.com/Prashant-Mediastinct/Assignment/database"
 	"log"
 	"net/http"
+
+	"github.com/Prashant-Mediastinct/Assignment/bidservice/controllers"
+	"github.com/Prashant-Mediastinct/Assignment/database"
 )
 
 func main() {
 
-	database.DBDef()
+	database.BDef()
 	defer database.DB.Close()
 
 	http.HandleFunc("/publisher_id/", controllers.GetAdvertisers)
