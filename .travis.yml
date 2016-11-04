@@ -4,6 +4,9 @@ go: master
   
 install: go get ./...
 
+git:
+  depth: 3
+
 script: 
   - go build adservice/main.go
   - go build bidservice/main.go
