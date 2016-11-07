@@ -6,8 +6,8 @@ fi
 
 if [ "$TRAVIS_BRANCH" == "develop" ]; then
 echo "Merge to Develop"
-git fetch
-echo "after fetch"
+git clone git@github.com:Prashant-Mediastinct/Assignment.git
+echo "after clone"
 git checkout "$TRAVIS_BRANCH" || exit 
 echo "after checkout"
 git merge "$TRAVIS_COMMIT" || exit 
