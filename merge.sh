@@ -4,7 +4,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     exit 0;
 fi
 
-if [ "$TRAVIS_PULL_REQUEST_BRANCH" != "develop" ]; then
+if [ "$TRAVIS_PULL_REQUEST_BRANCH" == "develop" ]; then
 echo "Merge to Develop"
 git checkout "$TRAVIS_PULL_REQUEST_BRANCH" || exit 1
 git merge "$TRAVIS_COMMIT" || exit 1
