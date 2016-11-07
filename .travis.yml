@@ -14,8 +14,7 @@ git:
 script: 
   - go build adservice/main.go
   - go build bidservice/main.go
-  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
+  # - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+  # - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 
-after_success :
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$BRANCH" == "$TRAVIS_BRANCH" ] ; then git merge feature; fi'
+after_success : ./merge_script.sh
