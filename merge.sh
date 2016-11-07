@@ -1,5 +1,5 @@
 
-if [ "$TRAVIS_BRANCH" != "feature" ]; then 
+if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then 
     echo "Here"
     exit 0;
 fi
@@ -11,4 +11,4 @@ git push origin feature  # here need some authorization and url
 
 echo "Merging Complete!"
 
-# [ "$TRAVIS_PULL_REQUEST" == "false" ] || 
+#  || [ "$TRAVIS_BRANCH" != "feature" ]
