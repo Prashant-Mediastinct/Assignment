@@ -8,7 +8,7 @@ if [ "$TRAVIS_BRANCH" == "develop" ]; then
 echo "Merge to Develop"
 git checkout "$TRAVIS_BRANCH" || exit 
 git merge "$TRAVIS_COMMIT" || exit 
-git push origin feature  # here need some authorization and url
+git push origin develop  # here need some authorization and url
 
 echo "Merging Complete!";
 fi
