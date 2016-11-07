@@ -5,5 +5,5 @@ fi
 
 git checkout develop || exit
 git merge "$TRAVIS_COMMIT" || exit
-git push origin "$TRAVIS_PULL_REQUEST_BRANCH"  # here need some authorization and url
+git push origin feature  # here need some authorization and url
 
