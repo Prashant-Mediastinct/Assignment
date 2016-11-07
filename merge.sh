@@ -4,10 +4,10 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     exit 0;
 fi
 
-if [ "$TRAVIS_PULL_REQUEST_BRANCH" == "develop" ]; then
+if [ "$TRAVIS_BRANCH" == "develop" ]; then
 echo "Merge to Develop"
-git checkout "$TRAVIS_PULL_REQUEST_BRANCH" || exit 1
-git merge "$TRAVIS_COMMIT" || exit 1
+git checkout "$TRAVIS_BRANCH" || exit 
+git merge "$TRAVIS_COMMIT" || exit 
 git push origin feature  # here need some authorization and url
 
 echo "Merging Complete!";
