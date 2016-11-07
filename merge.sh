@@ -1,5 +1,6 @@
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$TRAVIS_BRANCH" != "feature" ]; then 
+    echo "Here"
     exit 0;
 fi
 
