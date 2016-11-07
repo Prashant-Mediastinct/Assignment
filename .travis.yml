@@ -1,9 +1,12 @@
-
 language: go
 
 go: master
   
 install: go get ./...
+
+branch :
+  only :
+    - feature
 
 git:
   depth: 10
@@ -13,4 +16,4 @@ script:
   - go build bidservice/main.go
 
 after_success :
-  - git merge feature
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" && "$TRAVIS_PULL_REQUEST_BRANCH" == "feature"]; then git merge feature; fi'
