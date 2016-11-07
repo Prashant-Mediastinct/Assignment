@@ -1,10 +1,10 @@
 
-if [ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$TRAVIS_BRANCH" != "feature" ]; then 
+if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then 
     echo "Here"
     exit 0;
 fi
 
-if [ "$TRAVIS_PULL_REQUEST_BRANCH" != "develop" ]; then
+if [ "$TRAVIS_BRANCH" != "feature" ]; then
 echo "Merge to Develop"
 git checkout develop || exit 1
 git merge "$TRAVIS_COMMIT" || exit 1
