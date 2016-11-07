@@ -6,7 +6,7 @@ fi
 
 if [ "$TRAVIS_PULL_REQUEST_BRANCH" != "develop" ]; then
 echo "Merge to Develop"
-git checkout develop || exit 1
+git checkout "$TRAVIS_PULL_REQUEST_BRANCH" || exit 1
 git merge "$TRAVIS_COMMIT" || exit 1
 git push origin feature  # here need some authorization and url
 
