@@ -6,8 +6,6 @@ fi
 
 if [ "$TRAVIS_BRANCH" == "develop" ]; then
 echo "Merge to Develop"
-git config --global user.email "prashant@mediastinct.com"
-git config --global user.name "Prashant"
 git pull
 echo "after pull"
 git checkout "$TRAVIS_BRANCH" || exit 
