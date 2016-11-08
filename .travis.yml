@@ -22,8 +22,7 @@ script:
 after_success :
     - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then 
       echo "Here"
-      exit 0;
-    fi
+      exit 0; fi
     - if [ "$TRAVIS_BRANCH" == "develop" ]; then
         echo "Merge to Develop"
         git clone git@github.com:Prashant-Mediastinct/Assignment.git
@@ -34,5 +33,4 @@ after_success :
         echo "after merge"
         git push origin "$TRAVIS_BRANCH"  # here need some authorization and url
 
-        echo "Merging Complete!";
-      fi
+        echo "Merging Complete!"; fi
