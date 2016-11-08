@@ -13,11 +13,11 @@ echo "Merge to Develop"
 # git config user.name "Prashant-Mediastinct"
 git fetch --all --prune
 echo "after pull"
-git checkout "$TRAVIS_BRANCH" || exit 
+git checkout "origin/$TRAVIS_BRANCH" || exit 
 echo "after checkout"
-git merge "$TRAVIS_COMMIT" || exit 
+git merge "origin/$TRAVIS_COMMIT" || exit 
 echo "after merge"
-git push origin "$TRAVIS_BRANCH"  # here need some authorization and url
+git push origin "origin/$TRAVIS_BRANCH"  # here need some authorization and url
 
 echo "Merging Complete!";
 fi
