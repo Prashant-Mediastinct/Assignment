@@ -33,3 +33,6 @@ after_success :
         git merge "$TRAVIS_COMMIT" || exit \
         echo "after merge" \
         git push origin "$TRAVIS_BRANCH" \  # here need some authorization and url
+
+        echo "Merging Complete!" \
+      fi
